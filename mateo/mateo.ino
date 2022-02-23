@@ -26,7 +26,7 @@
 // if it is int value, isFloat=0, otherwise isFloat=1
 struct quantity{
 	//bool isFloat;
-	float value1;
+	const char*  value1;
 	//int value2;
 	const char* name;//[20];
 	const char* unit;//[3];
@@ -42,7 +42,7 @@ long lastTime = 0;
 quantity q[5];
 
 // function for simplify adding new quantities
-void initQuantity(int i, const char* n, float v1, const char* u){
+void initQuantity(int i, const char* n, const char*  v1, const char* u){
 	q[i].name=n;
 	q[i].value1=v1;
 	q[i].unit=u;	
@@ -161,21 +161,20 @@ void loop(){
 	}
   if(millis()-lastTime>20000){
     //generate random values, to be substitued for real sensors reading
-    q[0].value1 = random(-20, 40) + float(random(0, 99))/100;
-    q[1].value1 = random(50000, 150000);
-    q[2].value1 = random(0, 99) + float(random(0, 9))/10;
-    q[3].value1 = random(0, 15);
-    q[4].value1 = random(0, 30) + float(random(0, 99))/100;
+    q[0].value1 = String(random(-20, 40) + float(random(0, 99))/100);
+    q[1].value1 = String(random(50000, 150000);
+    q[2].value1 = String(random(0, 99) + float(random(0, 9))/10;
+    q[3].value1 = String(random(0, 15);
+    q[4].value1 = String(random(0, 30) + float(random(0, 99))/100;
     lastTime = millis();
     // make a string for assembling the data to log:
     String dataString = "";
 
     // read three sensors and append to the string:
+    dataString += String(millis);
     for (int i = 0; i < qn; i++) {
-      dataString += String(q[i].value1);
-      if (i < qn-1) {
-       dataString += ",";
-      }
+      dataString += ";";
+      dataString += q[i].value1;
     }
 
     // open the file. note that only one file can be open at a time,
