@@ -12,13 +12,14 @@
 * 	<body style="background-color:#FF0000;color=#3333FF">
 * 		<h1>Mateo - meteorologická stanice GML</h1>
 * 		<p style="font-size=20pt;">q[i].name je q[i].value q[i].unit</p>
+*     <a style=\"background-color:#FFFFFF;color:3333FF;font-size:25pt\" href=\"https://letkagml.space\">Letka GML</a>
 * 	</body>
 * </html>
 */
 
 #include <SPI.h>
 #include <EthernetENC.h>
-//#include <SD.h>
+#include <SD.h>
 //#include <bme280.h>
 
 // structure for the quantities, that will be used on Mateo
@@ -66,7 +67,15 @@ void setup(){
 	while(!Serial){;}
 	Serial.println("Mateo");
 	//Setup ethernet(CS=10)
+  Serial.println("ahoj");
+  if (!SD.begin(4)) {
+    Serial.println("Chyba");
+    // don't do anything more:
+    while (1);
+  }
+  Serial.println("inicializovano");
 	Ethernet.begin(mac, ip);
+  Serial.println("ahoj2");
   delay(10);
 
   // Two conditions to fastly solve occuring problems
@@ -95,12 +104,6 @@ void setup(){
 	initQuantity(3, "Směr větru", 0.0, "pi/4");
 	initQuantity(4, "Rychlost větru", 0.0, "m/s");
   //Serial.print("Inicializace SD...");
-  /*if (!SD.begin(4)) {
-    //Serial.println("Chyba");
-    // don't do anything more:
-    //while (1);
-  }
-  //Serial.println("inicializovano");*/
 }
 
 void loop(){
@@ -157,6 +160,7 @@ void loop(){
 		
 	}
   if(millis()-lastTime>20000){
+    //generate random values, to be substitued for real sensors reading
     q[0].value1 = random(-20, 40) + float(random(0, 99))/100;
     q[1].value1 = random(50000, 150000);
     q[2].value1 = random(0, 99) + float(random(0, 9))/10;
@@ -164,11 +168,11 @@ void loop(){
     q[4].value1 = random(0, 30) + float(random(0, 99))/100;
     lastTime = millis();
     // make a string for assembling the data to log:
-    /*String dataString = "";
+    String dataString = "";
 
     // read three sensors and append to the string:
     for (int i = 0; i < qn; i++) {
-      dataString += String(q[i].isFloat ? q[i].value1 : q[i].value2);
+      dataString += String(q[i].value1);
       if (i < qn-1) {
        dataString += ",";
       }
@@ -188,6 +192,6 @@ void loop(){
     // if the file isn't open, pop up an error:
     else {
       //Serial.println("error opening datalog.txt");
-    }*/
+    }
   }
 }
