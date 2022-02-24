@@ -52,6 +52,9 @@ void initQuantity(int i, const char* n, String  v1, const char* u){
 // some variables to be used for ethernet
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
+// declare reset fuction at address 0
+void(* resetFunc) (void) = 0;  
+
 IPAddress ip(172, 20, 11, 164);
 
 EthernetServer server(12345);
@@ -67,7 +70,6 @@ void setup(){
   while(!Serial){;}
   Serial.println("Mateo");
   //Setup ethernet(CS=10)
-  Serial.println("ahoj");
   if (!SD.begin(4)) {
     Serial.println("Chyba");
     // don't do anything more:
@@ -75,7 +77,6 @@ void setup(){
   }
   Serial.println("inicializovano");
   Ethernet.begin(mac, ip);
-  Serial.println("ahoj2");
   delay(10);
 
   // Two conditions to fastly solve occuring problems
@@ -192,5 +193,8 @@ void loop(){
     else {
       //Serial.println("error opening datalog.txt");
     }
+  }
+  if(millis()-lastTime>3600000){
+    resetFunc(); //call reset
   }
 }
