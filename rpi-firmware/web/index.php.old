@@ -4,29 +4,10 @@
 		<meta charset=utf-8>
 		<title>Mateo</title>
 		<style>
-			h1{
-font-size:35pt; color:rgb(6, 18, 122); text-align:center; font-family:lovelo; margin:30px;
-}
-p{
-font-size:25pt; color:rgb(6, 18, 122); text-align:left; font-family:draft; margin:5px;
-}
-a{
-font-size:25pt; color:#0000EE; text-align:left; font-family:draft; margin:5px;
-}
-
-
-
-
-
-@font-face {
-font-family: draft;
-src: url(./css/draftb.otf);
-}
-
-@font-face {
-font-family: lovelo;
-src: url(./css/Lovelo.otf);
-}
+			body{background-color:#3333FF}
+			h1{font-size:35pt;color:#FFFFFF;}
+			p{font-size:25pt;color:#FFFFFF;}
+			a{background-color:#FFFFFF;color:#3333FF;font-size:25pt;}
 		</style>
 	</head>
 	<body>
@@ -39,11 +20,11 @@ $teplota = fgets($file);
 $tlak = fgets($file);
 fclose($file);
 echo "		<p>Čas posledni aktualizace: " . $cas . "</p>";
-echo "		<p>Aktuální teplota: " . $teplota . " °C</p>";
+echo "		<p>Aktuální teplota: " . $teplota . " *C</p>";
 echo "		<p>Aktuální tlak: " . $tlak . " hPa</p>";
 ?>
 
 		<a href="https://letkagml.space">Letka GML</a></p>
-		<a href="data/data.txt" download>Stáhni txt soubor s daty</a>
+		<a href="data/data.txt" download>Stahni txt soubor s daty</a>
 	</body>
 </html>
