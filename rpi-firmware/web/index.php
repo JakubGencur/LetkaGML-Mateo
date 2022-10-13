@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+    		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    		<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    		<script type="text/javascript" src="graph/dataProcess.js"></script>
 		<meta charset=utf-8>
 		<title>Mateo</title>
 		<style>
@@ -37,13 +40,17 @@ $file = fopen("./data/actual.txt", "r");
 $cas = fgets($file);
 $teplota = fgets($file);
 $tlak = fgets($file);
+$vlhkost = fgets($file);
 fclose($file);
 echo "		<p>Čas posledni aktualizace: " . $cas . "</p>";
 echo "		<p>Aktuální teplota: " . $teplota . " °C</p>";
 echo "		<p>Aktuální tlak: " . $tlak . " hPa</p>";
+echo "		<p>Aktuální vlhkost: " . $vlhkost . " %</p>";
 ?>
 
 		<a href="https://letkagml.space">Letka GML</a></p>
-		<a href="data/data.txt" download>Stáhni txt soubor s daty</a>
+		<a href="graph/datas.txt" download>Nová data (od 12.10.2022)</a><br>
+		<a href="data/data.txt" download>Starý soubor s daty (do 10.10.2022)</a>
+    		<div id="linechart"></div>
 	</body>
 </html>
